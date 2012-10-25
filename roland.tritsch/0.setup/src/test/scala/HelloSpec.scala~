@@ -1,0 +1,9 @@
+package ie.tcd.sccs.funcprog.setup
+
+import org.scalatest._
+
+class HelloSpec extends FlatSpec with ShouldMatchers {
+  "Hello" should "allow you to increment a value by 1" in {
+    assert(incVal(1) === 2)
+  }
+}
