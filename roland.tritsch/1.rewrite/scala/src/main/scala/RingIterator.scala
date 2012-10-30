@@ -13,32 +13,32 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
   def this() = this(List(), 0)
   
   private def addBefore(element: T, position: Int): Unit = {
-    assert(!buffer.isEmpty)
-    assert(element != null)
-    assert(position >= 0 && position < buffer.size)
+    require(!buffer.isEmpty)
+    require(element != null)
+    require(position >= 0 && position < buffer.size)
 
     val (head, tail) = buffer.splitAt(position)
     buffer = head ::: List(element) ::: tail
   }
 
   private def addAfter(element: T, position: Int): Unit = {
-    assert(!buffer.isEmpty)
-    assert(element != null)
-    assert(position >= 0 && position < buffer.size)
+    require(!buffer.isEmpty)
+    require(element != null)
+    require(position >= 0 && position < buffer.size)
 
     val (head, tail) = buffer.splitAt(position+1)
     buffer = head ::: List(element) ::: tail
   }
 
   private def remove(position: Int): Unit = {
-    assert(position >= 0 && position < buffer.size)
+    require(position >= 0 && position < buffer.size)
 
     val (head, tail) = buffer.splitAt(position)
     buffer = head ::: tail.drop(1)  
   }
 
   private def get(position: Int): T = {
-    assert(position >= 0 && position < buffer.size)
+    require(position >= 0 && position < buffer.size)
 
     buffer(position)
   }
@@ -55,7 +55,7 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
    * added element.
    */
   def add(element: T): Unit = {
-    assert(element != null)
+    require(element != null)
     
     if(buffer.isEmpty) {
       buffer = List(element)
@@ -124,7 +124,7 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
   /** Resets the ring pointer to a given position.
    */
   def reset(position: Int): Unit = {
-    assert(position >= 0 && (buffer.isEmpty || position < buffer.size))
+    require(position >= 0 && (buffer.isEmpty || position < buffer.size))
     currentPosition = position
   }
 

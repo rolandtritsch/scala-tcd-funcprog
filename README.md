@@ -67,4 +67,18 @@ You then need to ...
 
 * Use the source code from the Java solution as a template.
 * Use the provided RingIterator to implement the solution.
+* Use > sbt console to start a repl and play with RingIterator to understand how it works and behaves.
 * Use the source code from Hello.scala as a template for the main.
+
+## Lab2 - Write a Scala program that uses Java
+
+Java integrates very well with Scala (or (depending on your point of view) the other way around). With Lab2 we want to show how to use Java from Scala. The aim is to rewrite the solution from Lab1 using Java collection types, namely ...
+
+* List and LinkedList from java.util and
+* LoopingListIterator from org.apache.commons.collections.iterators
+
+### Hints
+
+* Use mvnrepository.com to find out how to update the build.sbt with the library dependency for the Apache common collections lib.
+* Use the import ...{Original => Now} syntax to rename the classes.
+* Use asInstanceOf[T] to cast java.lang.Object into something that you want/need.
