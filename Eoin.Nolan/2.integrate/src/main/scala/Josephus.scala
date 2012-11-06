@@ -1,5 +1,7 @@
 package ie.tcd.sccs.funcprog.josephus
 
+import scala.annotation.tailrec
+
 // TODO import Java classes
 import java.util.List
 import java.util.LinkedList
@@ -18,15 +20,31 @@ object Josephus {
     iterator.reset;
 
 
-  // TODO kill soldiers until one is left over and return it
+  /* TODO kill soldiers until one is left over and return it
     while (iterator.size > 1) {
-      for (i <- 1 to skipping + 1){ 
+      for (i <- 0 to skipping){ 
         iterator.next;
       }
       iterator.remove;
     }
 
     return iterator.next.asInstanceOf[Int];
+
+    */
+
+    return tailRecursive(iterator, numOfSoldiers, skipping);
+  }
+
+  def tailRecursive(iterator: LoopingListIterator, numOfSoldiers: Int, skipping: Int): Int = {
+    if(iterator.size > 1){
+        for (i <- 0 to skipping){ 
+          iterator.next;
+        }
+        iterator.remove;
+        tailRecursive(iterator, numOfSoldiers, skipping);     
+      }else{
+        return iterator.next.asInstanceOf[Int];
+      }
   }
 
   def main(args: Array[String]): Unit = {
