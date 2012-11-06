@@ -1,10 +1,11 @@
 package ie.tcd.sccs.funcprog.josephus
 
 import java.util._
+import scala.util.logging.{Logged, ConsoleLogger}
 import org.apache.commons.collections.iterators._
-// TODO import Java classes
 
-object Josephus {
+//object Josephus extends Logged with ConsoleLogger {
+object Josephus extends Logged {
   def findSurvivor(numOfSoldiers: Int, skipping: Int): Int = {
     require(numOfSoldiers >= 1)
     require(skipping >= 0)
@@ -13,6 +14,7 @@ object Josephus {
     for(i <- 1 to numOfSoldiers) {
 	lst.add(i)
     }
+	log("init done..")
 
     val iter = new LoopingListIterator(lst)
 
@@ -23,6 +25,7 @@ object Josephus {
 			}
 			iter.remove
 		}
+
     return lst.get(0)
   }
 
