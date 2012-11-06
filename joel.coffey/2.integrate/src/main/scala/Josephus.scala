@@ -1,8 +1,8 @@
 package ie.tcd.sccs.funcprog.josephus
 
-import java.util.List
 import java.util.LinkedList
 import org.apache.commons.collections.iterators.LoopingListIterator
+import scala.annotation.tailrec
 
 object Josephus {
   def findSurvivor(numOfSoldiers: Int, skipping: Int): Int = {
@@ -15,12 +15,18 @@ object Josephus {
     Range(1, numOfSoldiers+1).foreach(itr.add)
     itr.reset
 
-    while (itr.size > 1) {
-      for (_ <- 1 to skipping+1) { itr.next }
+    find(itr, skipping)
+  }
+
+  @tailrec
+  private def find(itr: LoopingListIterator, skipping: Int): Int = {
+    if (itr.size > 1) {
+      for (_ <- 0 to skipping) { itr.next }
       itr.remove
+      find(itr, skipping)
+    } else {
+      itr.next.asInstanceOf[Int]
     }
-    
-    itr.next.asInstanceOf[Int]
   }
 
   def main(args: Array[String]): Unit = {
