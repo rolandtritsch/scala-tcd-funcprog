@@ -4,18 +4,26 @@ object Josephus {
     def findSurvivor(numOfSoldiers: Int, skipping: Int): Int = {
         require(numOfSoldiers >= 1)
         require(skipping >= 0)
-        var i:Int = 0
-        var theRing = new RingIterator[Int]( List() )
-        //for(int i = 1; i <= numOfSoldiers; i++) theRing.add(new Integer(i));
+        val theRing = new RingIterator[Int]( List(), 0 )
         
-        //for (i <- 1 until i <= numOfSoldiers) yield 1//theRing.
+        for (i <- 1 to numOfSoldiers) theRing.add(i)    
         
+        theRing.reset(0)
         
+        while (theRing.size > 1) {
+            for(j <- 0 until skipping) theRing.advance
+            
+            theRing.remove  
+        }
+        theRing.get
+    }
+
+    def main(args: Array[String]): Unit = {
+        require(args.length == 2);
         
+        val numOfSoldiers: Int = args(0).toInt
+        val killingEvery: Int = args(1).toInt
         
-        
-        
-        return 1
+        println(findSurvivor(numOfSoldiers, killingEvery-1))
     }    
-    
 }
