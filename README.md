@@ -82,3 +82,9 @@ Java integrates very well with Scala (or (depending on your point of view) the o
 * Use mvnrepository.com to find out how to update the build.sbt with the library dependency for the Apache common collections lib.
 * Use the import ...{Original => Now} syntax to rename the classes.
 * Use asInstanceOf[T] to cast java.lang.Object into something that you want/need.
+
+## LabN - Thinks to do, when you are getting bored
+
+* Help others with their implementation.
+* Rewrite the solution and use recursion instead of iteration to find the solution.
+* Extend RingIterator with Logged and add logging. Test it with the ConsoleLogger.
