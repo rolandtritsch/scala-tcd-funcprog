@@ -11,6 +11,6 @@ object Josephus {
     }
 
 	def findSurvivor(numOfSoldiers: Int, skipping: Int): Int = {
-		i + 1
+
 	}
 }
