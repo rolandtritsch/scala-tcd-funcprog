@@ -12,7 +12,6 @@ object Josephus {
         
         while (theRing.size > 1) {
             for(j <- 0 until skipping) theRing.advance
-            
             theRing.remove  
         }
         theRing.get
