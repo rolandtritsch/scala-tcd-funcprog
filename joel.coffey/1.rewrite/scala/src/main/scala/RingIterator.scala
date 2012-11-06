@@ -1,5 +1,7 @@
 package ie.tcd.sccs.funcprog.josephus
 
+import util.logging.Logged
+
 /** Implements a simple ring iterator over a List.
  * 
  * When the iterator reaches the end of the list it
@@ -9,10 +11,12 @@ package ie.tcd.sccs.funcprog.josephus
  * The iterator also supports updates (add/remove) to the
  * RingBuffer.
  */
-class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
+class RingIterator[T](var buffer: List[T], var currentPosition: Int)
+  extends Logged {
   def this() = this(List(), 0)
   
   private def addBefore(element: T, position: Int): Unit = {
+    log ("RingIterator: addBefore")
     require(!buffer.isEmpty)
     require(element != null)
     require(position >= 0 && position < buffer.size)
@@ -22,6 +26,7 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
   }
 
   private def addAfter(element: T, position: Int): Unit = {
+    log ("RingIterator: addAfter")
     require(!buffer.isEmpty)
     require(element != null)
     require(position >= 0 && position < buffer.size)
@@ -31,6 +36,7 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
   }
 
   private def remove(position: Int): Unit = {
+    log ("RingIterator: remove")
     require(position >= 0 && position < buffer.size)
 
     val (head, tail) = buffer.splitAt(position)
@@ -38,12 +44,14 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
   }
 
   private def get(position: Int): T = {
+    log ("RingIterator: get")
     require(position >= 0 && position < buffer.size)
 
     buffer(position)
   }
 
   private def advanceCounterClockwise: Unit = {
+    log ("RingIterator: advanceCounterClockwise")
     currentPosition = currentPosition - 1
     if(currentPosition < 0) currentPosition = buffer.size - 1
   }

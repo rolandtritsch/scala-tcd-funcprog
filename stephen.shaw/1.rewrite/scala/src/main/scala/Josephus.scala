@@ -1,5 +1,7 @@
 package ie.tcd.sccs.funcprog.josephus
 
+import util.logging.ConsoleLogger
+
 object Josephus {
     // TODO Implement solution here
     // HINT Use RingIterator
@@ -11,7 +13,7 @@ object Josephus {
 
 
     def findSurvivor(numOfSoldiers: Int, skipping: Int): Int = {
-        val theRing = new RingIterator[Int]();
+        val theRing = new RingIterator[Int]() with ConsoleLogger;
 
         for(i <- 1 to numOfSoldiers) {
             theRing.add(i)

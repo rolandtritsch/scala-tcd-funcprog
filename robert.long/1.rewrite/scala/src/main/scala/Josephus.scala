@@ -10,7 +10,7 @@ object Josephus {
         r.add(i)
       }
       r.reset(0)
-      for(j <- numOfSoldiers until 1 by -1) {
+      while (r.size > 1) {
         for (i <- 0 until skipping) {
           r.advance
         }
@@ -21,7 +21,7 @@ object Josephus {
     }
 
     def main(args: Array[String]): Unit = {
-      println(findSurvivor(args(0).toInt, args(1).toInt))
+      println(findSurvivor(args(0).toInt, args(1).toInt - 1))
     }
 
 }
