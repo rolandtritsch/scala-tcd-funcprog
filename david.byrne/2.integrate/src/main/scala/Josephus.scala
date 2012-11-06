@@ -18,15 +18,29 @@ object Josephus {
     for(i <- 1 to numOfSoldiers) itr.add(i)
 
 	// TODO kill soldiers until one is left over and return it
-	while(itr.size() != 1){
+	/*while(itr.size() != 1){
 		for(j <- 1 to skipping+1){
 			itr.next()
 		}
 		itr.remove()
-	}	
+	}
 
-	return itr.next().asInstanceOf[Int]
+	return itr.next().asInstanceOf[Int]*/
+	return survivorRecursion(itr, skipping)
   }
+  
+  @tailrec
+  def survivorRecursion(itr: LoopingListIterator, skip: Int): Int = {
+	if(itr.size() != 1){
+		for(j <- 1 to skip+1){
+			itr.next()
+		}
+		itr.remove()
+		survivorRecursion(itr, skip)
+	}else{
+		return itr.next().asInstanceOf[Int]
+	}
+  } 
 
   def main(args: Array[String]): Unit = {
     assert(args.size == 2)
