@@ -4,7 +4,7 @@ import org.apache.commons.collections.iterators.LoopingListIterator
 
 import java.util.List
 import java.util.LinkedList
-
+import scala.annotation.tailrec
 
 object Josephus {
 
@@ -32,6 +32,7 @@ object Josephus {
     findRecursively(iterator, skipping)
   }
 
+  @tailrec
   def findRecursively(iterator: LoopingListIterator, skipping: Int): Int = {
     if (iterator.size == 1) {
         iterator.next.asInstanceOf[Int]    
