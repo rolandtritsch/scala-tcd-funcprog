@@ -1,10 +1,10 @@
 package ie.tcd.sccs.funcprog.josephus
 
-object Josephus {
-    // TODO Implement solution here
-    // HINT Use RingIterator
-    
+object Josephus {    
     def findSurvivor(numSol: Int, skip: Int): Int = {
+        assert(numSol >= 1)
+        assert(skip >= 0)
+        
         val ring = new RingIterator[Int]()
         
         for(i <- 1 to numSol) ring.add(i)
