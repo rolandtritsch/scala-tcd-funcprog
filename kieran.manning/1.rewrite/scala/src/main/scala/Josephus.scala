@@ -1,6 +1,13 @@
 package ie.tcd.sccs.funcprog.josephus
 
+
 object Josephus {
-    // TODO Implement solution here
-    // HINT Use RingIterator
+    def findSurivor(var numOfSolider: Int, var skipping: Int):Int = {
+        require(numOfSoldiers >= 1)
+        require(skipping >= 0)
+
+        var ringBuffer = ringBuffer[Int] = _
+        
+        for(i <- 0
+    }
 }
