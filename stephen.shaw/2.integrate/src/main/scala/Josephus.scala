@@ -1,7 +1,5 @@
 package ie.tcd.sccs.funcprog.josephus
 
-// TODO import Java classes
-
 import org.apache.commons.collections.iterators.LoopingListIterator
 
 import java.util.List
@@ -28,10 +26,6 @@ object Josephus {
     
     // Comes out as java.lang.Object
     iterator.next.asInstanceOf[Int]
-
-    // TODO build linked list and put iterator on it
-
-    // TODO kill soldiers until one is left over and return it
   }
 
   def main(args: Array[String]): Unit = {
