@@ -1,5 +1,7 @@
 package ie.tcd.sccs.funcprog.josephus
 
+import scala.util.logging.Logged
+
 /** Implements a simple ring iterator over a List.
  * 
  * When the iterator reaches the end of the list it
@@ -9,10 +11,12 @@ package ie.tcd.sccs.funcprog.josephus
  * The iterator also supports updates (add/remove) to the
  * RingBuffer.
  */
-class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
+class RingIterator[T](var buffer: List[T], var currentPosition: Int) extends Logged {
   def this() = this(List(), 0)
   
   private def addBefore(element: T, position: Int): Unit = {
+    log("RingIterator.addBefore was called!")
+
     require(!buffer.isEmpty)
     require(element != null)
     require(position >= 0 && position < buffer.size)
@@ -22,6 +26,8 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
   }
 
   private def addAfter(element: T, position: Int): Unit = {
+    log("RingIterator.addAfter was called!")
+
     require(!buffer.isEmpty)
     require(element != null)
     require(position >= 0 && position < buffer.size)
@@ -31,6 +37,8 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
   }
 
   private def remove(position: Int): Unit = {
+    log("RingIterator.remove was called!")
+
     require(position >= 0 && position < buffer.size)
 
     val (head, tail) = buffer.splitAt(position)
@@ -38,12 +46,16 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
   }
 
   private def get(position: Int): T = {
+    log("RingIterator.get was called!")
+
     require(position >= 0 && position < buffer.size)
 
     buffer(position)
   }
 
   private def advanceCounterClockwise: Unit = {
+    log("RingIterator.advanceCounterClockwise was called!")
+
     currentPosition = currentPosition - 1
     if(currentPosition < 0) currentPosition = buffer.size - 1
   }
@@ -55,6 +67,8 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
    * added element.
    */
   def add(element: T): Unit = {
+    log("RingIterator.add was called!")
+
     require(element != null)
     
     if(buffer.isEmpty) {
@@ -80,6 +94,8 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
    * Throws an exception if the ring is empty.
    */
   def remove: Unit = {
+    log("RingIterator.remove was called!")
+
     if(buffer.isEmpty) throw new NoSuchElementException
 
     // remember the next element to test the post condition
@@ -96,6 +112,8 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
   /** Advances the ring pointer (and warps over, if it has to).
    */
   def advance: Unit = {
+    log("RingIterator.advance was called!")
+
     currentPosition = currentPosition + 1
     if(currentPosition >= buffer.size) currentPosition = 0
   }
@@ -105,6 +123,8 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
    * Throws an exception, if there is no element.
    */
   def get: T = {
+    log("RingIterator.get was called!")
+
     if(buffer.isEmpty) throw new NoSuchElementException
     get(currentPosition)
   }
@@ -112,18 +132,24 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
   /** Returns the size of the ring.
    */
   def size: Int = {
+    log("RingIterator.size was called!")
+
     buffer.size
   }
 
   /** Checks, if the ring is empty.
    */
   def isEmpty: Boolean = {
+    log("RingIterator.isEmpty was called!")
+
     buffer.isEmpty
   }
 
   /** Resets the ring pointer to a given position.
    */
   def reset(position: Int): Unit = {
+    log("RingIterator.reset was called!")
+
     require(position >= 0 && (buffer.isEmpty || position < buffer.size))
     currentPosition = position
   }
@@ -133,6 +159,8 @@ class RingIterator[T](var buffer: List[T], var currentPosition: Int) {
    * This is for debugging and testing only.
    */
   def dump: List[T] = {
+    log("RingIterator.dump was called!")
+
     val (head, tail) = buffer.splitAt(currentPosition)
     tail ::: head
   }
