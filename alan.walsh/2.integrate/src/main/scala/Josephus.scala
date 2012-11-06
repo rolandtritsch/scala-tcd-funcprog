@@ -17,7 +17,8 @@ object Josephus {
 		for(i <- 0 until skipping+1) iter.next
 	    iter.remove
 	}
-	army.getFirst
+	//army.getFirst
+	iter.next.asInstanceOf[Int]
   }
 
   def main(args: Array[String]): Unit = {
