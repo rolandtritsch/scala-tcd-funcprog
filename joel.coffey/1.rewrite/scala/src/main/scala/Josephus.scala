@@ -1,5 +1,7 @@
 package ie.tcd.sccs.funcprog.josephus
 
+import util.logging.ConsoleLogger
+
 object Josephus {
   def main(args: Array[String]): Unit = {
     val numOfSoldiers = Integer.parseInt(args(0));
@@ -9,16 +11,11 @@ object Josephus {
   }
 
   def findSurvivor(numOfSoldiers: Int, skipping: Int): Int = {
-    val ring = new RingIterator[Int]();
-
-    Range(1, numOfSoldiers+1).foreach(ring.add) 
-    ring.advance
-
-    for (s <- 1 until numOfSoldiers) {
-      for (k <- 1 to skipping) { ring.advance }
+    val ring = new RingIterator[Int](Range(1, numOfSoldiers+1).toList, 0) with ConsoleLogger
+    while (ring.size > 1) {
+      for (_ <- 1 to skipping) { ring.advance }
       ring.remove
     }
-
     ring.get
   }
 }

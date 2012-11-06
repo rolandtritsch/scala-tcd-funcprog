@@ -1,6 +1,8 @@
 package ie.tcd.sccs.funcprog.josephus
 
-// TODO import Java classes
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Iterator;
 
 object Josephus {
   def findSurvivor(numOfSoldiers: Int, skipping: Int): Int = {
@@ -8,6 +10,8 @@ object Josephus {
     require(skipping >= 0)
 
     // TODO build linked list and put iterator on it
+    Collection theRing = new LinkedList();
+    for(i <- 1 to numOfSoldiers) theRing.add(i)
 
     // TODO kill soldiers until one is left over and return it
   }
