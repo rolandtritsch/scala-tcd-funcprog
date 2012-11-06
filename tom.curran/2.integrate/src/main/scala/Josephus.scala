@@ -1,19 +1,27 @@
 package ie.tcd.sccs.funcprog.josephus
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.Iterator;
+import java.util.LinkedList
+import java.util.Iterator
+
+import org.apache.commons.collections.iterators.LoopingListIterator
+
+import scala.util.logging.{Logged, ConsoleLogger}
 
 object Josephus {
   def findSurvivor(numOfSoldiers: Int, skipping: Int): Int = {
     require(numOfSoldiers >= 1)
     require(skipping >= 0)
-
-    // TODO build linked list and put iterator on it
-    Collection theRing = new LinkedList();
+    
+    val theRing: java.util.LinkedList[Int] = new LinkedList()
     for(i <- 1 to numOfSoldiers) theRing.add(i)
-
-    // TODO kill soldiers until one is left over and return it
+    
+    val itr = new LoopingListIterator(theRing)
+    
+    while(itr.size > 1){
+        for(i <- 1 to skipping+1) itr.next
+        itr.remove
+    }
+    itr.next.asInstanceOf[Int]
   }
 
   def main(args: Array[String]): Unit = {
