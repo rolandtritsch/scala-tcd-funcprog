@@ -15,7 +15,7 @@ object Josephus {
 	// create the iterator
 	val theRing = new RingIterator[Int](ring.toList, 0)
 	
-	for (i <- numOfSoldiers until 1 by -1) {
+	while(theRing.size > 1){
 	    for (i <- 0 until skipping) theRing.advance
 	    theRing.remove
 	}
@@ -25,6 +25,6 @@ object Josephus {
 
     /* Invokes the findSurvivor solution on the 1st and 2nd parameter */
     def main(args: Array[String]): Unit = {
-        println("Result: " + findSurvivor(Integer.parseInt(args(0)), Integer.parseInt(args(1))))
+        println("Result: " + findSurvivor(args(0).toInt, args(1).toInt - 1))
     }
 }
