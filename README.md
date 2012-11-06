@@ -31,8 +31,8 @@ Please install [sbt](http://www.scala-sbt.org/release/docs/Getting-Started/Setup
 
 ### Homework
 
-1. Make the test pass. Change the source code in src/test/scala and run sbt test again.
-1. Change Hello.scala to look at the first argument and make it print "Hello " + firstArg. Note: To run it you need to put the arg into quotes with the run (e.g. > sbt "run world").
+1. Make the test pass. Change the source code in src/test/scala and run `> sbt test` again.
+1. Change Hello.scala to look at the first argument and make it print "Hello " + firstArg. Note: To run it you need to put the arg into quotes with the run (e.g. `> sbt "run world"`).
 1. Bonus: Get a github account, send me an email (roland@tritsch.org), so that I can add you as a collaborator and commit/push your source code to the repo (to figure out how to do that is a an excerise for the reader :)).
 
 ### Resources
@@ -45,8 +45,6 @@ Please install [sbt](http://www.scala-sbt.org/release/docs/Getting-Started/Setup
 With Lab1 we want to rewrite a Java program in Scala. The program is an implementation of a solution to [Josephus problem](http://en.wikipedia.org/wiki/Josephus_problem). To make it work you need to ...
 
     > cd <location of your choice>/scala-tcd-funcprog
-    > git pull
-	> git checkout labs
     > cp -R roland.tritsch/1.rewrite <your firstname>.<your lastname>
     > cd <your firstname>.<your lastname>/1.rewrite/java
     > sbt "run 41 3"
@@ -67,7 +65,7 @@ You then need to ...
 
 * Use the source code from the Java solution as a template.
 * Use the provided RingIterator to implement the solution.
-* Use > sbt console to start a repl and play with RingIterator to understand how it works and behaves.
+* Use `> sbt console` to start a repl and play with RingIterator to understand how it works and behaves.
 * Use the source code from Hello.scala as a template for the main.
 
 ## Lab2 - Write a Scala program that uses Java
