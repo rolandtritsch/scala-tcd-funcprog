@@ -5,7 +5,9 @@ import org.apache.commons.collections.iterators.LoopingListIterator
 import java.util.List
 import java.util.LinkedList
 
+
 object Josephus {
+
   def findSurvivor(numOfSoldiers: Int, skipping: Int): Int = {
     require(numOfSoldiers >= 1)
     require(skipping >= 0)
@@ -19,13 +21,25 @@ object Josephus {
 
     iterator.reset
 
-    while (iterator.size > 1) {
-        for (i <- 1 to skipping + 1) iterator.next
-        iterator.remove
-    }
-    
-    // Comes out as java.lang.Object
-    iterator.next.asInstanceOf[Int]
+/*    while (iterator.size > 1) {
+ *        for (i <- 1 to skipping + 1) iterator.next
+ *        iterator.remove
+ *    }
+ *    
+ *    // Comes out as java.lang.Object
+ *    iterator.next.asInstanceOf[Int]
+ */
+    findRecursively(iterator, skipping)
+  }
+
+  def findRecursively(iterator: LoopingListIterator, skipping: Int): Int = {
+    if (iterator.size == 1) {
+        iterator.next.asInstanceOf[Int]    
+    } else {
+        for (i <- 1 to skipping + 1) iterator.next 
+        iterator.remove 
+        findRecursively(iterator, skipping)
+    }   
   }
 
   def main(args: Array[String]): Unit = {
