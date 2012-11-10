@@ -1,20 +1,22 @@
 package ie.tcd.sccs.funcprog.josephus
 
-object Josephus {
+import scala.util.logging._
+
+object Josephus extends Logged with ConsoleLogger {
+// object Josephus extend Logged {
   def findSurvivor(numOfSoldiers: Int, skipping: Int): Int = {
-    assert(numOfSoldiers >= 1)
-    assert(skipping >= 0)
+    require(numOfSoldiers >= 1)
+    require(skipping >= 0)
 
-    // val soldiers = Range(1, numOfSoldiers+1).toList
-    // val theRing = new RingIterator[Int](soldiers, soldiers.size-1)
-    val theRing = new RingIterator[Int]()
-    for(i <- 1 to numOfSoldiers) theRing.add(i)
+    // val theRing = new RingIterator[Int]()
+    // for(i <- 1 to numOfSoldiers) theRing.add(i)
+    val soldiers = Range(1, numOfSoldiers+1).toList
+    val theRing = new RingIterator[Int](soldiers, 0)
 
-    theRing.reset(0)
     while(theRing.size > 1) {
       for(i <- 0 until skipping) theRing.advance
       theRing.remove
-      // println(theRing.dump.mkString(","))
+      log(theRing.dump.mkString(","))
     }
 
     theRing.get
