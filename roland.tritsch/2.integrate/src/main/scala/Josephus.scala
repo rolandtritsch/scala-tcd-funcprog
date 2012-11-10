@@ -6,20 +6,44 @@ import java.lang.{Integer => JInteger}
 
 object Josephus {
   def findSurvivor(numOfSoldiers: Int, skipping: Int): Int = {
-    assert(numOfSoldiers >= 1)
-    assert(skipping >= 0)
+    require(numOfSoldiers >= 1)
+    require(skipping >= 0)
 
     val soldiers: JList[JInteger] = new JLinkedList[JInteger]()
     for(i <- 1 to numOfSoldiers) soldiers.add(new JInteger(i))
-    val theRing = new LoopingListIterator(soldiers)
+    val ringOfSoldiers = new LoopingListIterator(soldiers)
 
-    theRing.reset
-    while(theRing.size > 1) {
-      for(i <- 0 to skipping) theRing.next
-      theRing.remove
+    ringOfSoldiers.reset
+    while(ringOfSoldiers.size > 1) {
+      for(i <- 0 to skipping) ringOfSoldiers.next
+      ringOfSoldiers.remove
+    }
+    
+    assert(ringOfSoldiers.size == 1)
+    ringOfSoldiers.next.asInstanceOf[JInteger]
+  }
+
+  def findSurvivorRecursively(numOfSoldiers: Int, skipping: Int): Int = {
+    require(numOfSoldiers >= 1)
+    require(skipping >= 0)
+
+    def findSurvivorRecursion(ringOfSoldiers: LoopingListIterator, skipping: Int): Int = {
+      require(ringOfSoldiers.size >= 1)
+      require(skipping >= 0)
+
+      if(ringOfSoldiers.size == 1) ringOfSoldiers.next.asInstanceOf[JInteger]
+      else {
+        for(i <- 0 to skipping) ringOfSoldiers.next
+        ringOfSoldiers.remove
+	findSurvivorRecursion(ringOfSoldiers, skipping)
+      }
     }
 
-    theRing.next.asInstanceOf[JInteger]
+    val soldiers: JList[JInteger] = new JLinkedList[JInteger]()
+    for(i <- 1 to numOfSoldiers) soldiers.add(new JInteger(i))
+    val ringOfSoldiers = new LoopingListIterator(soldiers)
+
+    findSurvivorRecursion(ringOfSoldiers, skipping)    
   }
 
   def main(args: Array[String]): Unit = {
@@ -29,5 +53,6 @@ object Josephus {
     val killingEvery = args(1).toInt
 
     println(findSurvivor(numOfSoldiers, killingEvery-1))
+    println(findSurvivorRecursively(numOfSoldiers, killingEvery-1))
   }
 }
