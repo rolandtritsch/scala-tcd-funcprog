@@ -1,6 +1,10 @@
 package ie.tcd.sccs.funcprog.josephus
 
+import org.apache.commons.collections.iterators.LoopingListIterator
+import java.util.{List => JList, LinkedList => JLinkedList}
+import java.lang.{Integer => JInteger}
 
+import scala.annotation.tailrec
 
 object Josephus {
   def findSurvivor(numOfSoldiers: Int, skipping: Int): Int = {
@@ -29,6 +33,7 @@ object Josephus {
     for(i <- 1 to numOfSoldiers) soldiers.add(new JInteger(i))
     val ringOfSoldiers = new LoopingListIterator(soldiers)
 
+    @tailrec
     def findSurvivorRecursion: Int = {
       require(ringOfSoldiers.size >= 1)
 
