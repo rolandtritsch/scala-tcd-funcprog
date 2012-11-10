@@ -2,8 +2,8 @@ package ie.tcd.sccs.funcprog.josephus
 
 import scala.util.logging._
 
-object Josephus extends Logged with ConsoleLogger {
 // object Josephus extend Logged {
+object Josephus extends Logged with ConsoleLogger {
   def findSurvivor(numOfSoldiers: Int, skipping: Int): Int = {
     require(numOfSoldiers >= 1)
     require(skipping >= 0)
