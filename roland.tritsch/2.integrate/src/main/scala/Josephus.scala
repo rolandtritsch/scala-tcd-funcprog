@@ -27,23 +27,22 @@ object Josephus {
     require(numOfSoldiers >= 1)
     require(skipping >= 0)
 
-    def findSurvivorRecursion(ringOfSoldiers: LoopingListIterator, skipping: Int): Int = {
+    val soldiers: JList[JInteger] = new JLinkedList[JInteger]()
+    for(i <- 1 to numOfSoldiers) soldiers.add(new JInteger(i))
+    val ringOfSoldiers = new LoopingListIterator(soldiers)
+
+    def findSurvivorRecursion: Int = {
       require(ringOfSoldiers.size >= 1)
-      require(skipping >= 0)
 
       if(ringOfSoldiers.size == 1) ringOfSoldiers.next.asInstanceOf[JInteger]
       else {
         for(i <- 0 to skipping) ringOfSoldiers.next
         ringOfSoldiers.remove
-	findSurvivorRecursion(ringOfSoldiers, skipping)
+	findSurvivorRecursion
       }
     }
 
-    val soldiers: JList[JInteger] = new JLinkedList[JInteger]()
-    for(i <- 1 to numOfSoldiers) soldiers.add(new JInteger(i))
-    val ringOfSoldiers = new LoopingListIterator(soldiers)
-
-    findSurvivorRecursion(ringOfSoldiers, skipping)    
+    findSurvivorRecursion
   }
 
   def main(args: Array[String]): Unit = {
